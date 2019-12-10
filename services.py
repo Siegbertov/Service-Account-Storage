@@ -36,6 +36,44 @@ class password_window(object):
             messagebox.showerror("Wrong Password", "Attemps left: {}".format(5 - self.attemps))
 
 
+def add_account():
+    ser = serviceE.get()
+    log = loginE.get()
+    passw = passwordE.get()
+
+    if ser == "" or log == "" or passw == "":
+        messagebox.showerror("Error", "You forget something")
+    elif (" " in log) or (" " in passw):
+        messagebox.showerror("Error", "Login or Password couldn't contains space")
+    else:
+
+        f = open('accounts.txt', "a")
+        f.write(ser + ", " + log + ", " + passw + "\n")
+        f.close()
+
+        txt = "service: {}\nlogin: {}\npassword: {}\nSuccessfully Added".format(ser, log, passw)
+        messagebox.showinfo("New Account", txt)
+
+        serviceE.delete(0, END)
+        loginE.delete(0, END)
+        passwordE.delete(0, END)
+
+
+def show_accounts():
+    account_window = Toplevel(root)
+    account_window.title("Accounts")
+    account_window.geometry("+{}+{}".format(550, 100))
+    account_window.resizable(width=False, height=False)
+
+    f = open("accounts.txt", "r")
+    f.seek(0)
+    for line in f.readlines():
+        ser, log, passw = line.split(", ")
+        ser, log, passw = ser.strip(), log.strip(), passw.strip()
+        txt = "{}\n{} {}\n".format(ser, log, passw)
+        Label(account_window, text=txt).pack(ipadx=10, ipady=10)
+
+
 root = Tk()
 root.title("Service Account Storage")
 root.geometry("{}x{}+{}+{}".format(400, 400, 100, 100))
@@ -63,10 +101,10 @@ password.place(rely=0.5, relx=0.05, relheight=0.1, relwidth=0.3)
 passwordE = Entry(root, bd=2)
 passwordE.place(rely=0.5, relx=0.35, relheight=0.1, relwidth=0.6)
 
-sbmt = Button(root, text="Add", font=fonttxt)
+sbmt = Button(root, text="Add", font=fonttxt, command = add_account)
 sbmt.place(rely=0.7, relx=0.1, relheight=0.1, relwidth=0.8)
 
-show = Button(root, text="Show", font=fonttxt)
+show = Button(root, text="Show", font=fonttxt, command = show_accounts)
 show.place(rely=0.85, relx=0.1, relheight=0.1, relwidth=0.8)
 
 root.mainloop()
