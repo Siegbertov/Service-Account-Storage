@@ -45,4 +45,28 @@ fonttxt = ("Helvetica", "16")
 root.withdraw()
 pw = password_window(root)
 
+lbl = Label(root, text="Add Account", font=fonttxt)
+lbl.place(rely=0.05, relx=0.05, relheight=0.1, relwidth=0.9)
+
+service = Label(root, text="Service:", font=fonttxt, anchor=E)
+service.place(rely=0.2, relx=0.05, relheight=0.1, relwidth=0.3)
+serviceE = Entry(root, bd=2)
+serviceE.place(rely=0.2, relx=0.35, relheight=0.1, relwidth=0.6)
+
+login = Label(root, text="Login:", font=fonttxt, anchor=E)
+login.place(rely=0.35, relx=0.05, relheight=0.1, relwidth=0.3)
+loginE = Entry(root, bd=2)
+loginE.place(rely=0.35, relx=0.35, relheight=0.1, relwidth=0.6)
+
+password = Label(root, text="Password:", font=fonttxt, anchor=E)
+password.place(rely=0.5, relx=0.05, relheight=0.1, relwidth=0.3)
+passwordE = Entry(root, bd=2)
+passwordE.place(rely=0.5, relx=0.35, relheight=0.1, relwidth=0.6)
+
+sbmt = Button(root, text="Add", font=fonttxt)
+sbmt.place(rely=0.7, relx=0.1, relheight=0.1, relwidth=0.8)
+
+show = Button(root, text="Show", font=fonttxt)
+show.place(rely=0.85, relx=0.1, relheight=0.1, relwidth=0.8)
+
 root.mainloop()
